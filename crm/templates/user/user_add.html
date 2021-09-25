@@ -1,0 +1,34 @@
+{% extends 'common/base.html' %}
+
+{% block content %}
+<a class="btn btn-default" href="{% url 'user_list' %}">Previous Page</a>
+<div class="form-edit">
+    <h1>Add User</h1>
+    <form method="POST" class="user-form">
+        {% csrf_token %}
+        {% for field in form %}
+        {% if field.label != "Password" and field.name != "Superuser status" %}
+        <fieldset class="form-group">
+            <label class="control-label">{{ field.label }}</label>
+            {{ field.errors }}
+            {% if field.value %}
+                <input type="text" class="form-control" name="{{ field.name }}" value="{{ field.value }}">
+            {% else %}
+                <input type="text" class="form-control" name="{{ field.name }}" placeholder="{{ field.label }}">
+            {% endif %}
+        </fieldset>
+        {% endif %}
+        {% endfor %}
+        <label class="control-label">{{ form.password.label }}</label>
+        {{ form.password.errors }}
+        <input type="password" class="form-control" name="{{ form.password.name }}" placeholder="{{ form.password.label }}">
+        <div class="checkbox">
+            <label>
+                <input type="checkbox" name="is_superuser">Superuser
+            </label>
+        </div>
+        <button type="submit" class="save btn btn-primary">Save</button>
+        <a class="btn btn-inverse" href="{% url 'user_list' %}">Cancel</a>
+    </form>
+</div>
+{% endblock %}

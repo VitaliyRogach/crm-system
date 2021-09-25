@@ -1,0 +1,18 @@
+{% extends 'common/base.html' %}
+
+{% block content %}
+<a class="btn btn-default" href="{% url 'voucher_list' %}">Voucher List</a>
+<div>
+    <h1>{{ voucher.name_of_voucher }}</h1>
+    <p>Company Name: <strong>{{ voucher.company_name }}</strong></p>
+    <p>Count of days: <strong>{{ voucher.count_of_days }}</strong></p>
+    <p>Count of person: <strong>{{ voucher.count_of_person }}</strong></p>
+    <p>Telephone: <strong>{{ voucher.number }}</strong></p>
+    {% if user.is_superuser %}
+        <a class="btn btn-default" href="{% url 'voucher_edit' voucher.pk %}">
+            <span class="glyphicon glyphicon-pencil"></span></a>
+        <a class="btn btn-danger" href="{% url 'voucher_delete' voucher.pk %}" onclick="return confirm('Are you sure?')">
+            <span class="glyphicon glyphicon-trash"></span></a>
+    {% endif %}
+</div>
+{% endblock %}

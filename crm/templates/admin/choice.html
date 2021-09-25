@@ -1,0 +1,29 @@
+{% extends "common/base.html" %}
+
+{% block content %}
+    <a href="{% url 'company_list' %}"><span class="btn btn-default">Companies</span></a>
+    <a href="{% url 'user_list' %}"><span class="btn btn-default">Users</span></a>
+    <a href="{% url 'voucher_list' %}"><span class="btn btn-default">Vouchers</span></a>
+
+<div class="container">
+    <div class="row">
+    <a href="{% url 'user_list' %}">
+        <div class="col-md-4">
+            <img src="/static/images/users.png"/>
+            <h2>USERS ADMINISTRATION</h2>
+        </div>
+    </a>
+    <a href="{% url 'company_list' %}">
+        <div class="col-md-4">
+            <img src="/static/images/companies.png"/>
+            <h2>COMPANIES ADMINISTRATION</h2>
+        </div>
+    </a>
+    <a href="{% url 'voucher_list' %}">
+        <div class="col-md-4">
+            <img src="/static/images/voucher.png"/>
+            <h2>VOUCHERS</h2>
+        </div>
+    </a>
+</div></div>
+{% endblock %}

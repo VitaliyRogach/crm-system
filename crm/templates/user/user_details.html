@@ -1,0 +1,13 @@
+{% extends 'common/base.html' %}
+
+{% block content %}
+<a class="btn btn-default" href="{% url 'user_list' %}">Previous Page</a>
+<div>
+    <h1>{{ user.username }}</a></h1>
+    <p>Name: {{ user.first_name }}</p>
+    <p>Surname: {{ user.last_name }}</p>
+    <p>Email: {{ user.email }}</p>
+    <a class="btn btn-default" href="{% url 'user_edit' pk=user.pk %}">
+        <span class="glyphicon glyphicon-pencil"></span></a>
+</div>
+{% endblock %}

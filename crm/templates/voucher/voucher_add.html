@@ -1,0 +1,24 @@
+{% extends 'common/base.html' %}
+
+{% block content %}
+<a class="btn btn-default" href="{% url 'voucher_list' %}">Voucher List</a>
+<div class="form-edit">
+    <h1>New Voucher</h1>
+    <form method="POST" class="voucher-form">
+        {% csrf_token %}
+        {% for field in form %}
+        <fieldset class="form-group">
+            <label class="control-label">{{ field.label }}</label>
+            {{ field.errors }}
+            {% if field.value %}
+                <input type="text" class="form-control" name="{{ field.name }}" value="{{ field.value }}">
+            {% else %}
+                <input type="text" class="form-control" name="{{ field.name }}" placeholder="{{ field.label }}">
+            {% endif %}
+        </fieldset>
+        {% endfor %}
+        <button type="submit" class="save btn btn-primary">Save</button>
+        <a class="btn btn-inverse" href="{% url 'voucher_list' %}">Cancel</a>
+    </form>
+</div>
+{% endblock %}

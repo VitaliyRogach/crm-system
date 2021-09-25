@@ -1,0 +1,15 @@
+{% extends "common/base.html" %}
+
+{% block content %}
+
+<div class="container">
+    <form class="form-signin" method="post" action="{% url 'login' %}" role="form">
+        {% csrf_token %}
+        <h2 class="form-signin-heading">Please, sign in</h2>
+        <input type="text" value="{{ request.POST.username }}" name="username" class="form-control" placeholder="Username" required>
+        <input type="password" value="" name="password" class="form-control" placeholder="Password" required>
+        <button class="btn btn-lg btn-primary btn-block" type="submit" name="submit">Sign in</button>
+    </form>
+</div>
+
+{% endblock %}

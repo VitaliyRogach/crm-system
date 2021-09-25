@@ -1,0 +1,45 @@
+{% extends 'common/base.html' %}
+
+{% block content %}
+{% if user.is_authenticated %}
+    {% if user.is_superuser %}
+        <a href="{% url 'choice' %}"><span class="btn btn-default">Main Page</span></a>
+        <a href="{% url 'voucher_new' %}"><span class="btn btn-primary">Add Voucher</span></a>
+        <a href="{% url 'voucher_sorted_list' %}"><span class="btn btn-primary">Sort by Count of days</span></a>
+        <a href="{% url 'download_voucher_list' %}"><span class="btn btn-success">Download report</span></a>
+    {% endif %}
+
+    <h2>List of vouchers in the database</h2>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>Voucher Name</th>
+            <th>Company Name</th>
+            <th>Count of days</th>
+            <th>Count of person</th>
+            <th>Telephone</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for voucher in vouchers %}
+        <tr>
+            <td class="name_of_voucher_comp"><a href="{% url 'voucher_details' pk=voucher.pk %}">{{ voucher.name_of_voucher }}</a></td>
+            <td>{{ voucher.company_name }}</td>
+            <td>{{ voucher.count_of_days }}</td>
+            <td>{{ voucher.count_of_person }}</td>
+            <td>{{ voucher.number }}</td>
+            <td>
+            {% if user.is_superuser %}
+                <a class="btn btn-default" href="{% url 'voucher_edit' pk=voucher.pk %}">
+                    <span class="glyphicon glyphicon-pencil"></span></a>
+                <a class="btn btn-danger" href="{% url 'voucher_delete' pk=voucher.pk %}" onclick="return confirm('Are you sure?')">
+                    <span class="glyphicon glyphicon-trash"></span></a>
+            {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endif %}
+{% endblock %}
